@@ -10,6 +10,7 @@ import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../Input/Input';
 import { toast } from 'react-hot-toast';
+import Button from '../Button';
 
 
 const RegisterModal = () => {
@@ -36,7 +37,7 @@ const RegisterModal = () => {
             })
             .catch((err) => {
                 toast.error('something went wrong')
-            })
+            })    
             .finally(() => { 
                 setLoading(false)
             })
@@ -47,8 +48,23 @@ const RegisterModal = () => {
             <Heading title='Welcome to Airbnb' subtitle='Create an account' />
             <Input id='email' label='Email' disabled={loading} register={register} error={errors} required />
             <Input id='name' label='Name' disabled={loading} register={register} error={errors} required />
-            <Input id='password' label='Paaword' disabled={ loading} register={register} error={errors} required />
+            <Input id='password' label='Password' disabled={ loading} register={register} error={errors} required />
         </div>
+    )
+    const footerContent = (
+        <div className='flex flex-col gap-4'>
+            <hr />
+            <Button label='Continue with Google' outline onClick={() => { }} icon={FcGoogle} />
+            <Button label='Continue with Github' outline onClick={() => { }} icon={AiFillGithub} />\
+            
+            <div className='text-neutral-500 text-center mt-4 font-light'>
+                <div className=' justify-center flex flex-row items-center gap-2'>
+                    <div>Already have an account?</div>
+                    <div onClick={registerModal.onClose} className='text-neutral-800 hover:underline cursor-pointer'>Log in</div>
+                    </div>
+            </div>
+        </div>
+        
     )
   return (
       <div>
@@ -57,7 +73,8 @@ const RegisterModal = () => {
               actionLabel='Continue'
               onClose={registerModal.onClose}
               onSubmit={handleSubmit(onSubmit)}
-                body={bodyContent}
+              body={bodyContent}
+              footer={footerContent}
           
           />
     </div>
